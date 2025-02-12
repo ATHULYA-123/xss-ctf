@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Simple XSS Challenge</title>
+</head>
+<body>
+    <h2>Find the XSS vulnerability!</h2>
+    <form action="" method="GET">
+        <label for="name">Enter your name:</label>
+        <input type="text" id="name" name="name">
+        <button type="submit">Submit</button>
+    </form>
+    
+    <p>Hello, <span id="output"></span>!</p>
+    
+    <script>
+        // Get the value from the URL
+        const urlParams = new URLSearchParams(window.location.search);
+        const name = urlParams.get('name');
+        
+        // Display the user input without sanitization (vulnerable to XSS)
+        if (name) {
+            document.getElementById('output').innerHTML = name;
+        }
+    </script>
+</body>
+</html>
